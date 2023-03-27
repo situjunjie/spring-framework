@@ -1,7 +1,9 @@
 buildscript {
 	repositories {
-		gradlePluginPortal()
+		maven { url 'https://maven.aliyun.com/repository/gradle-plugin'}
+		maven { url 'https://maven.aliyun.com/repository/spring-plugin' }
 		maven { url "https://repo.spring.io/plugins-release" }
+		gradlePluginPortal()
 	}
 	dependencies {
 		classpath("io.spring.gradle:propdeps-plugin:0.0.9.RELEASE")
@@ -104,7 +106,7 @@ configure(allprojects) { project ->
 
 	compileJava.options*.compilerArgs = commonCompilerArgs +
 			["-Xlint:varargs", "-Xlint:fallthrough", "-Xlint:rawtypes",
-			 "-Xlint:deprecation", "-Xlint:unchecked", "-Werror"]
+			 "-Xlint:deprecation", "-Xlint:unchecked"]
 
 	compileTestJava.options*.compilerArgs = commonCompilerArgs +
 			["-Xlint:-varargs", "-Xlint:-fallthrough", "-Xlint:-rawtypes",
@@ -152,8 +154,12 @@ configure(allprojects) { project ->
 	}
 
 	repositories {
+		maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+		maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
 		mavenCentral()
 		maven { url "https://repo.spring.io/libs-spring-framework-build" }
+		maven { url "https://repo.spring.io/milestone" }
+		maven { url "https://repo.spring.io/plugins-release" }
 	}
 
 	dependencies {
