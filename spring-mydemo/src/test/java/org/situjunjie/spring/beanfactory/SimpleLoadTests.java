@@ -7,6 +7,9 @@ import org.springframework.core.io.ClassPathResource;
 
 public class SimpleLoadTests {
 
+	/**
+	 * 开启一个BeanFactory 简单加载BeanDefinition
+	 */
 	@Test
 	public void testLoadBean(){
 		XmlBeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("applicationContext.xml"));
