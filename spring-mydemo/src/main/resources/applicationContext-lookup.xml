@@ -9,8 +9,9 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<bean class="org.situjunjie.spring.bean.Student" name="student">
-		<property name="id" value="1" />
-		<property name="name" value="situjunjie" />
+	<bean class="org.situjunjie.spring.bean.lookup.LookUpTest" id="lookUpTest">
+		<lookup-method name="getUserBean" bean="policeman"></lookup-method>
 	</bean>
+	<bean class="org.situjunjie.spring.bean.Teacher" id="teacher"></bean>
+	<bean class="org.situjunjie.spring.bean.Policeman" id="policeman" />
 </beans>

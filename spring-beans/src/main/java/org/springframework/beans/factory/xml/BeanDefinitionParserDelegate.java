@@ -510,26 +510,35 @@ public class BeanDefinitionParserDelegate {
 		this.parseState.push(new BeanEntry(beanName));
 
 		String className = null;
+		//解析Bean的class属性
 		if (ele.hasAttribute(CLASS_ATTRIBUTE)) {
 			className = ele.getAttribute(CLASS_ATTRIBUTE).trim();
 		}
 		String parent = null;
+		//解析parent属性
 		if (ele.hasAttribute(PARENT_ATTRIBUTE)) {
 			parent = ele.getAttribute(PARENT_ATTRIBUTE);
 		}
 
 		try {
+			//创建初始化BeanDefinition  创建承载Bean属性的对象,有了BeanDefinition
 			AbstractBeanDefinition bd = createBeanDefinition(className, parent);
 
+			//完善BeanDefinition的其他属性 如scope dependon lazy-init autowire 等
 			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
 			bd.setDescription(DomUtils.getChildElementValueByTagName(ele, DESCRIPTION_ELEMENT));
 
+			//处理Meta标签
 			parseMetaElements(ele, bd);
+			//解析lookup
 			parseLookupOverrideSubElements(ele, bd.getMethodOverrides());
+			//解析replaceMethod
 			parseReplacedMethodSubElements(ele, bd.getMethodOverrides());
-
+			//解析构造器参数
 			parseConstructorArgElements(ele, bd);
+			//解析property
 			parsePropertyElements(ele, bd);
+			//解析qualifier
 			parseQualifierElements(ele, bd);
 
 			bd.setResource(this.readerContext.getResource());
@@ -656,6 +665,7 @@ public class BeanDefinitionParserDelegate {
 	public void parseMetaElements(Element ele, BeanMetadataAttributeAccessor attributeAccessor) {
 		NodeList nl = ele.getChildNodes();
 		for (int i = 0; i < nl.getLength(); i++) {
+			//遍历子节点的meta标签
 			Node node = nl.item(i);
 			if (isCandidateElement(node) && nodeNameEquals(node, META_ELEMENT)) {
 				Element metaElement = (Element) node;
@@ -703,6 +713,7 @@ public class BeanDefinitionParserDelegate {
 		for (int i = 0; i < nl.getLength(); i++) {
 			Node node = nl.item(i);
 			if (isCandidateElement(node) && nodeNameEquals(node, CONSTRUCTOR_ARG_ELEMENT)) {
+				//提取构造器标签进行遍历解析 constructor-arg
 				parseConstructorArgElement((Element) node, bd);
 			}
 		}
@@ -787,6 +798,7 @@ public class BeanDefinitionParserDelegate {
 		String typeAttr = ele.getAttribute(TYPE_ATTRIBUTE);
 		String nameAttr = ele.getAttribute(NAME_ATTRIBUTE);
 		if (StringUtils.hasLength(indexAttr)) {
+			//按照index 注入
 			try {
 				int index = Integer.parseInt(indexAttr);
 				if (index < 0) {
@@ -795,6 +807,7 @@ public class BeanDefinitionParserDelegate {
 				else {
 					try {
 						this.parseState.push(new ConstructorArgumentEntry(index));
+						//解析 construct-arg的value  这里propertyName传null 是因为有index 不穿propertyName 用index定位
 						Object value = parsePropertyValue(ele, bd, null);
 						ConstructorArgumentValues.ValueHolder valueHolder = new ConstructorArgumentValues.ValueHolder(value);
 						if (StringUtils.hasLength(typeAttr)) {
@@ -805,6 +818,7 @@ public class BeanDefinitionParserDelegate {
 						}
 						valueHolder.setSource(extractSource(ele));
 						if (bd.getConstructorArgumentValues().hasIndexedArgumentValue(index)) {
+						//如果重复指定了index 这里会报错
 							error("Ambiguous constructor-arg entries for index " + index, ele);
 						}
 						else {
