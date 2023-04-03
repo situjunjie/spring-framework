@@ -1,4 +1,4 @@
-package org.situjunjie.spring.beanfactory.lookup;
+package org.situjunjie.spring.beanfactory.load.lookup;
 
 import org.junit.Test;
 import org.situjunjie.spring.bean.lookup.LookUpTest;

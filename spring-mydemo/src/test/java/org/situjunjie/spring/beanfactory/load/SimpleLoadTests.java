@@ -1,7 +1,7 @@
-package org.situjunjie.spring.beanfactory;
+package org.situjunjie.spring.beanfactory.load;
 
 import org.junit.Test;
-import org.situjunjie.spring.bean.Student;
+import org.situjunjie.spring.bean.load.Student;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
 

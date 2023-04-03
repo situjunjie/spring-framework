@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://www.situjunjie.com/schema/custom/spring-user"
+		xmlns:tns="http://www.situjunjie.com/schema/custom/spring-user"
+		elementFormDefault="qualified">
+
+	<element name="user">
+		<complexType>
+			<attribute name="id" type="string" ></attribute>
+			<attribute name="email" type="string"></attribute>
+			<attribute name="name" type="string"></attribute>
+		</complexType>
+	</element>
+</schema>
+

@@ -1,4 +1,4 @@
-package org.situjunjie.spring.beanfactory.replace;
+package org.situjunjie.spring.beanfactory.load.replace;
 
 
 import org.junit.Test;
