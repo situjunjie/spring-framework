@@ -61,6 +61,7 @@ public abstract class AbstractBeanDefinitionParser implements BeanDefinitionPars
 	@Nullable
 	public final BeanDefinition parse(Element element, ParserContext parserContext) {
 		AbstractBeanDefinition definition = parseInternal(element, parserContext);
+		//下面做一些校验
 		if (definition != null && !parserContext.isNested()) {
 			try {
 				String id = resolveId(element, definition, parserContext);

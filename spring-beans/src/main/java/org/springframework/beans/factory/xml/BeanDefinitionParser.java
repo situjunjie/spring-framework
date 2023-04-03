@@ -52,6 +52,7 @@ public interface BeanDefinitionParser {
 	 * provides access to a {@link org.springframework.beans.factory.support.BeanDefinitionRegistry}
 	 * @return the primary {@link BeanDefinition}
 	 */
+	//解析自定义标签 下面大面积的模板模式，一层一层去看
 	@Nullable
 	BeanDefinition parse(Element element, ParserContext parserContext);
 
