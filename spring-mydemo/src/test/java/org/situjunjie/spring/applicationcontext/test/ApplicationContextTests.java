@@ -39,4 +39,13 @@ public class ApplicationContextTests {
 		System.out.println(xmlBeanFactory.getBean("student"));
 
 	}
+
+	/**
+	 * 测试自定义BeanPostProcessor
+	 */
+	@Test
+	public void testMyBeanPostProcessor(){
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext-bpp.xml");
+
+	}
 }
