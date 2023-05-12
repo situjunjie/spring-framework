@@ -61,6 +61,7 @@ public class AopNamespaceHandler extends NamespaceHandlerSupport {
 	 */
 	@Override
 	public void init() {
+		//解析aop命名空间的处理器
 		// In 2.0 XSD as well as in 2.5+ XSDs
 		registerBeanDefinitionParser("config", new ConfigBeanDefinitionParser());
 		registerBeanDefinitionParser("aspectj-autoproxy", new AspectJAutoProxyBeanDefinitionParser());
